@@ -14,6 +14,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 //Components imported
+import Main from './components/Main';
 
 injectTapEventPlugin();
 
@@ -33,6 +34,7 @@ ReactDOM.render(
 			<BrowserRouter>
 				<div>
 					<Switch>
+						<Route path="/" exact component={Main} />
 						<Route component={NoMatch} />
 					</Switch>
 				</div>
