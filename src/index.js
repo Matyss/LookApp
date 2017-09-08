@@ -6,6 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import persistState from 'redux-localstorage';
+import ReduxPromise from 'redux-promise';
 
 import reducers from './reducers';
 
@@ -20,7 +21,7 @@ injectTapEventPlugin();
 
 const createStoreWithMiddleware = composeWithDevTools(
 	persistState(),
-	applyMiddleware()
+	applyMiddleware(ReduxPromise)
 )(createStore);
 
 const NoMatch = () =>

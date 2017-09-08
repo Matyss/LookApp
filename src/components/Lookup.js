@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+//Action creators
+import { lookup } from '../actions';
+
 //Material-UI components
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,7 +12,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 //Validation config
 const validate = values => {
 	const errors = {};
-	const requiredFields = ['lookup'];
+	const requiredFields = ['textfield'];
 	requiredFields.forEach(field => {
 		if (!values[field]) {
 			errors[field] = 'Required';
@@ -33,10 +36,7 @@ const renderText = ({ input, label, meta: { touched, error }, ...custom }) =>
 class Lookup extends Component {
 	//Method to submit with callback
 	onSubmit(values) {
-		// this.props.addEat(values, () => {
-		// 	this.props.history.push('/eats');
-		// });
-		console.log(values.lookup);
+		this.props.lookup(values);
 	}
 
 	render() {
@@ -44,14 +44,14 @@ class Lookup extends Component {
 			<form>
 				<div>
 					<Field
-						name="lookup"
+						name="textfield"
 						component={renderText}
 						label="Enter NIP/REGON/KRS"
 					/>
 				</div>
 				<div>
 					<RaisedButton
-						label="Search"
+						label="lookup"
 						primary={true}
 						disabled={this.props.invalid}
 						onClick={this.props.handleSubmit(this.onSubmit.bind(this))}
@@ -65,4 +65,4 @@ class Lookup extends Component {
 export default reduxForm({
 	validate,
 	form: 'Lookup'
-})(connect(null, {})(Lookup));
+})(connect(null, { lookup })(Lookup));
