@@ -12,6 +12,7 @@ export function lookup(company) {
 
 	return {
 		type: LOOK_UP,
-		payload: request
+		payload: request,
+		meta: id
 	};
 }

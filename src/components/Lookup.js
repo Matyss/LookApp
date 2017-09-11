@@ -34,9 +34,15 @@ const renderText = ({ input, label, meta: { touched, error }, ...custom }) =>
 
 //Form component
 class Lookup extends Component {
-	//Method to submit with callback
+	//Method to submit with history check
 	onSubmit(values) {
-		this.props.lookup(values);
+		const { lookupData } = this.props;
+
+		if (lookupData[values.textfield]) {
+			console.log('its there');
+		} else {
+			this.props.lookup(values);
+		}
 	}
 
 	render() {
@@ -62,7 +68,11 @@ class Lookup extends Component {
 	}
 }
 
+function mapDispatchToProps({ lookupData }) {
+	return { lookupData };
+}
+
 export default reduxForm({
 	validate,
 	form: 'Lookup'
-})(connect(null, { lookup })(Lookup));
+})(connect(mapDispatchToProps, { lookup })(Lookup));
