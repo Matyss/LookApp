@@ -16,6 +16,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 //Components imported
 import Main from './components/Main';
+import HistoryLookup from './components/HistoryLookup';
 
 injectTapEventPlugin();
 
@@ -35,7 +36,7 @@ ReactDOM.render(
 			<BrowserRouter>
 				<div>
 					<Switch>
-						<Route path="/history" component={History} />
+						<Route path="/history" component={HistoryLookup} />
 						<Route path="/" exact component={Main} />
 						<Route component={NoMatch} />
 					</Switch>
