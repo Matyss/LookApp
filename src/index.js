@@ -35,6 +35,7 @@ ReactDOM.render(
 			<BrowserRouter>
 				<div>
 					<Switch>
+						<Route path="/history" component={History} />
 						<Route path="/" exact component={Main} />
 						<Route component={NoMatch} />
 					</Switch>

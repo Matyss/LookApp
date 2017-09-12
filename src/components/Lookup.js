@@ -50,14 +50,12 @@ class Lookup extends Component {
 			this.props.display(lookupData[values.textfield]);
 		} else {
 			this.props.lookup(values);
-			// setTimeout(() => {
-			// 	console.log(lookupData);
-			// }, 2000);
 		}
-		console.log(lookupData);
 	}
 
 	render() {
+		console.log('render');
+
 		return (
 			<form>
 				<div>
