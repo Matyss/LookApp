@@ -21,7 +21,14 @@ class Display extends Component {
 					<h6>Please enter the correct number and click LOOKUP</h6>
 				</div>
 			);
+		} else if (this.props.error === true) {
+			return (
+				<div>
+					<p>Something went wrong</p>
+				</div>
+			);
 		}
+
 		return (
 			<Table>
 				<TableHeader>
@@ -96,8 +103,8 @@ class Display extends Component {
 	}
 }
 
-function mapStateToProps({ display }) {
-	return { display };
+function mapStateToProps({ display, error }) {
+	return { display, error };
 }
 
 export default connect(mapStateToProps)(Display);

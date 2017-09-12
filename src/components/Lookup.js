@@ -17,6 +17,14 @@ const validate = values => {
 		if (!values[field]) {
 			errors[field] = 'Required';
 		}
+		if (values[field] && !/^[KRSPL0-9._-]{9,14}$/i.test(values[field])) {
+			errors[field] = 'Only KRS/PL prefixes and numbers are valid';
+		}
+		if (values[field]) {
+			if (values[field].length < 9 || values[field].length > 14) {
+				errors[field] = 'Entry must be between 9 and 14 characters';
+			}
+		}
 	});
 	return errors;
 };
@@ -42,7 +50,11 @@ class Lookup extends Component {
 			this.props.display(lookupData[values.textfield]);
 		} else {
 			this.props.lookup(values);
+			// setTimeout(() => {
+			// 	console.log(lookupData);
+			// }, 2000);
 		}
+		console.log(lookupData);
 	}
 
 	render() {
