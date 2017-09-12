@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 //Action creators
-import { lookup } from '../actions';
+import { lookup, display } from '../actions';
 
 //Material-UI components
 import TextField from 'material-ui/TextField';
@@ -39,7 +39,7 @@ class Lookup extends Component {
 		const { lookupData } = this.props;
 
 		if (lookupData[values.textfield]) {
-			console.log('its there');
+			this.props.display(lookupData[values.textfield]);
 		} else {
 			this.props.lookup(values);
 		}
@@ -68,11 +68,11 @@ class Lookup extends Component {
 	}
 }
 
-function mapDispatchToProps({ lookupData }) {
+function mapStateToProps({ lookupData }) {
 	return { lookupData };
 }
 
 export default reduxForm({
 	validate,
 	form: 'Lookup'
-})(connect(mapDispatchToProps, { lookup })(Lookup));
+})(connect(mapStateToProps, { lookup, display })(Lookup));
