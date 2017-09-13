@@ -5,11 +5,14 @@ const ROOT_URL = `http://ihaveanidea.aveneo.pl/NIPAPI/api/Company?CompanyId=`;
 export const LOOK_UP = 'LOOK_UP';
 export const DISPLAY_INFO = 'DISPLAY_INFO';
 
-export function lookup(company) {
+export function lookup(company, callback) {
 	const id = company.textfield;
 	const url = `${ROOT_URL}${id}`;
 
-	const request = axios.get(url);
+	const request = axios.get(url).then(dataFromRequest => {
+		callback(dataFromRequest);
+		return dataFromRequest;
+	});
 
 	return {
 		type: LOOK_UP,

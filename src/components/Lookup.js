@@ -49,7 +49,9 @@ class Lookup extends Component {
 		if (lookupData[values.textfield]) {
 			this.props.display(lookupData[values.textfield]);
 		} else {
-			this.props.lookup(values);
+			this.props.lookup(values, dataFromRequest => {
+				this.props.display(dataFromRequest.data.CompanyInformation);
+			});
 		}
 	}
 
