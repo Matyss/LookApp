@@ -38,7 +38,7 @@ class HistoryLookup extends Component {
 			);
 		});
 
-		return _.map(filteredCompanies, company => {
+		return _.map(filteredCompanies, (company, i) => {
 			return (
 				<ListItem
 					primaryText={`Company name: ${company.Name}`}
@@ -51,6 +51,7 @@ class HistoryLookup extends Component {
 					}
 					secondaryTextLines={2}
 					onClick={this.toggleText.bind(this)}
+					key={i}
 				/>
 			);
 		});
