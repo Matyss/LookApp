@@ -15,16 +15,20 @@ class Display extends Component {
 	render() {
 		let company = this.props.display;
 
-		if (!company) {
+		if (!company && !this.props.error) {
 			return (
 				<div>
-					<h6>Please enter the correct number and click LOOKUP</h6>
+					<p style={{ color: '#00BCD4' }}>
+						Please enter the correct number and click <strong>LOOKUP</strong>
+					</p>
 				</div>
 			);
-		} else if (this.props.error === true) {
+		} else if (this.props.error && !company) {
 			return (
 				<div>
-					<p>Something went wrong</p>
+					<p style={{ color: '#FF4081' }}>
+						Company with given number was not found
+					</p>
 				</div>
 			);
 		}

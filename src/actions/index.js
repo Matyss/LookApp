@@ -5,6 +5,8 @@ const ROOT_URL = `http://ihaveanidea.aveneo.pl/NIPAPI/api/Company?CompanyId=`;
 export const LOOK_UP = 'LOOK_UP';
 export const DISPLAY_INFO = 'DISPLAY_INFO';
 export const REMOVE_ENTRY = 'REMOVE_ENTRY';
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
 
 export function lookup(company, callback) {
 	const id = company.textfield;
@@ -33,5 +35,17 @@ export function remove(key) {
 	return {
 		type: REMOVE_ENTRY,
 		payload: key
+	};
+}
+
+export function increment() {
+	return {
+		type: INCREMENT
+	};
+}
+
+export function decrement() {
+	return {
+		type: DECREMENT
 	};
 }

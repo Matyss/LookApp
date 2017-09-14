@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 //Actions
-import { remove } from '../actions';
+import { remove, increment, decrement } from '../actions';
 
 //Import Material-UI component
 import { List, ListItem } from 'material-ui/List';
@@ -29,7 +29,7 @@ class HistoryLookup extends Component {
 	componentWillMount() {
 		const { lookupData } = this.props;
 		const now = Date.now();
-		const setTime = 86400000 * this.state.counter; //SET THIS PROPERTY!!!
+		const setTime = 86400000 * this.props.counter;
 		_.map(lookupData, (item, i) => {
 			let startDate = +new Date(item.BusinessActivityStart);
 			if (now - startDate > setTime) {
@@ -39,9 +39,17 @@ class HistoryLookup extends Component {
 		});
 	}
 
-	handleRemove() {}
+	handleDecrement() {
+		if (this.props.counter > 1) {
+			this.props.decrement();
+		}
+	}
 
-	handleAdd() {}
+	handleIncrement() {
+		if (this.props.counter < 14) {
+			this.props.increment();
+		}
+	}
 
 	//Searchbar controller
 	updateSearch(e) {
@@ -93,19 +101,19 @@ class HistoryLookup extends Component {
 					<FloatingActionButton
 						secondary
 						style={{ margin: '5px' }}
-						onClick={this.handleAdd.bind(this)}
+						onClick={this.handleIncrement.bind(this)}
 					>
 						<ContentAdd />
 					</FloatingActionButton>
 					<FloatingActionButton
 						style={{ margin: '5px' }}
-						onClick={this.handleRemove.bind(this)}
+						onClick={this.handleDecrement.bind(this)}
 					>
 						<ContentRemove />
 					</FloatingActionButton>
-					<p className="text-muted">
-						Remove entries after: {this.state.counter}{' '}
-						{this.state.counter === 1 ? 'day' : 'days'}
+					<p className="text-muted" style={{ fontWeight: '300' }}>
+						Remove entries after: {this.props.counter}{' '}
+						{this.props.counter === 1 ? 'day' : 'days'}
 					</p>
 				</div>
 				<div className="container">
@@ -135,8 +143,10 @@ const FloatBtn = {
 };
 
 //Export and props
-function mapStateToProps({ lookupData }) {
-	return { lookupData };
+function mapStateToProps({ lookupData, counter }) {
+	return { lookupData, counter };
 }
 
-export default connect(mapStateToProps, { remove })(HistoryLookup);
+export default connect(mapStateToProps, { remove, increment, decrement })(
+	HistoryLookup
+);
