@@ -1,4 +1,5 @@
-import { LOOK_UP } from '../actions/index';
+import _ from 'lodash';
+import { LOOK_UP, REMOVE_ENTRY } from '../actions/index';
 
 export default function(state = {}, action) {
 	switch (action.type) {
@@ -11,6 +12,8 @@ export default function(state = {}, action) {
 			} else {
 				return state;
 			}
+		case REMOVE_ENTRY:
+			return _.omit(state, action.payload);
 	}
 	return state;
 }
