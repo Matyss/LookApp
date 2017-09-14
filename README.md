@@ -6,7 +6,7 @@ It was created as a proof of concept during recruitment process.
 
 Clone this repo to your local machine and run:
 
-### `$ npm install`
-## `npm start`
+# `$ npm install`
+# `$ npm start`
 
 Enjoy!
