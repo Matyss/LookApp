@@ -11,10 +11,14 @@ import {
 	TableRowColumn
 } from 'material-ui/Table';
 
+//Spinner
+import Spinner from 'react-spinkit';
+
 class Display extends Component {
 	render() {
 		let company = this.props.display;
 
+		//Conditional rendering of display component
 		if (!company && !this.props.error) {
 			return (
 				<div>
@@ -31,71 +35,70 @@ class Display extends Component {
 					</p>
 				</div>
 			);
+		} else if (this.props.loader) {
+			return (
+				<div style={{ margin: '2em auto' }}>
+					<Spinner name="ball-scale-multiple" color="#00BCD4" />
+				</div>
+			);
 		}
 
+		//Table body with data
 		return (
-			<Table>
+			<Table style={{ minWidth: '400px' }}>
 				<TableHeader>
 					<TableRow>
 						<TableHeaderColumn
-							colSpan="3"
-							tooltip="Super Header"
-							style={{ textAlign: 'center' }}
+							colSpan="2"
+							tooltip="Information about company you searched for"
+							style={{ textAlign: 'center', fontSize: '1.5em' }}
 						>
 							{company.Name} company details:
 						</TableHeaderColumn>
 					</TableRow>
 					<TableRow>
-						<TableHeaderColumn>ID</TableHeaderColumn>
 						<TableHeaderColumn>Information</TableHeaderColumn>
 						<TableHeaderColumn>Value</TableHeaderColumn>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
 					<TableRow>
-						<TableRowColumn>1</TableRowColumn>
 						<TableRowColumn>Regon</TableRowColumn>
 						<TableRowColumn>
 							{company.Regon}
 						</TableRowColumn>
 					</TableRow>
 					<TableRow>
-						<TableRowColumn>2</TableRowColumn>
 						<TableRowColumn>Name</TableRowColumn>
 						<TableRowColumn>
 							{company.Name}
 						</TableRowColumn>
 					</TableRow>
 					<TableRow>
-						<TableRowColumn>3</TableRowColumn>
 						<TableRowColumn>Province</TableRowColumn>
 						<TableRowColumn>
 							{company.Province}
 						</TableRowColumn>
 					</TableRow>
 					<TableRow>
-						<TableRowColumn>4</TableRowColumn>
 						<TableRowColumn>County</TableRowColumn>
 						<TableRowColumn>
 							{company.County}
 						</TableRowColumn>
 					</TableRow>
 					<TableRow>
-						<TableRowColumn>5</TableRowColumn>
 						<TableRowColumn>City / Postal Code</TableRowColumn>
 						<TableRowColumn>
 							{company.Place} / {company.PostalCode}
 						</TableRowColumn>
 					</TableRow>
 					<TableRow>
-						<TableRowColumn>6</TableRowColumn>
 						<TableRowColumn>Address</TableRowColumn>
 						<TableRowColumn>
 							{company.Street} str, {company.HouseNumber}/{company.ApartmentNumber}
 						</TableRowColumn>
 					</TableRow>
 					<TableRow>
-						<TableRowColumn>7</TableRowColumn>
 						<TableRowColumn>Business Type</TableRowColumn>
 						<TableRowColumn>
 							{company.Type}
@@ -107,8 +110,8 @@ class Display extends Component {
 	}
 }
 
-function mapStateToProps({ display, error }) {
-	return { display, error };
+function mapStateToProps({ display, error, loader }) {
+	return { display, error, loader };
 }
 
 export default connect(mapStateToProps)(Display);

@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 //Action creators
-import { lookup, display } from '../actions';
+import * as actions from '../actions';
 
 //Material-UI components
 import TextField from 'material-ui/TextField';
@@ -49,17 +49,18 @@ class Lookup extends Component {
 		if (lookupData[values.textfield]) {
 			this.props.display(lookupData[values.textfield]);
 		} else {
+			const that = this;
+			this.props.loadingStart();
 			this.props.lookup(values, dataFromRequest => {
 				this.props.display(dataFromRequest.data.CompanyInformation);
+				setTimeout(function() {
+					that.props.loadingEnd();
+				}, 2500);
 			});
 		}
 	}
 
-	//7835083242
-
 	render() {
-		console.log('render');
-
 		return (
 			<form>
 				<div>
@@ -89,4 +90,4 @@ function mapStateToProps({ lookupData }) {
 export default reduxForm({
 	validate,
 	form: 'Lookup'
-})(connect(mapStateToProps, { lookup, display })(Lookup));
+})(connect(mapStateToProps, actions)(Lookup));

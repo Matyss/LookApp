@@ -15,20 +15,10 @@ export default class Header extends Component {
 						Search for companies using NIP, REGON or KRS number.
 					</p>
 					<Link to="/">
-						<RaisedButton
-							style={myButton}
-							label="Search"
-							secondary={true}
-							label="search"
-						/>
+						<RaisedButton style={myButton} label="Search" secondary={true} />
 					</Link>
 					<Link to="/history">
-						<RaisedButton
-							style={myButton}
-							label="History"
-							primary={true}
-							label="history"
-						/>
+						<RaisedButton style={myButton} label="History" primary={true} />
 					</Link>
 				</div>
 			</div>

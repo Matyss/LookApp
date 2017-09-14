@@ -1,4 +1,4 @@
-import { LOOK_UP, DISPLAY_INFO } from '../actions/index';
+import { LOOK_UP, DISPLAY_INFO } from '../actions/types';
 
 export default function(state = false, action) {
 	switch (action.type) {

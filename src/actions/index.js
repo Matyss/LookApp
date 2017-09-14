@@ -1,12 +1,15 @@
 import axios from 'axios';
+import {
+	LOOK_UP,
+	DISPLAY_INFO,
+	REMOVE_ENTRY,
+	INCREMENT,
+	DECREMENT,
+	LOADING_START,
+	LOADING_END
+} from './types';
 
 const ROOT_URL = `http://ihaveanidea.aveneo.pl/NIPAPI/api/Company?CompanyId=`;
-
-export const LOOK_UP = 'LOOK_UP';
-export const DISPLAY_INFO = 'DISPLAY_INFO';
-export const REMOVE_ENTRY = 'REMOVE_ENTRY';
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
 
 export function lookup(company, callback) {
 	const id = company.textfield;
@@ -47,5 +50,17 @@ export function increment() {
 export function decrement() {
 	return {
 		type: DECREMENT
+	};
+}
+
+export function loadingStart() {
+	return {
+		type: LOADING_START
+	};
+}
+
+export function loadingEnd() {
+	return {
+		type: LOADING_END
 	};
 }

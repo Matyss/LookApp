@@ -25,11 +25,13 @@ const createStoreWithMiddleware = composeWithDevTools(
 	applyMiddleware(ReduxPromise)
 )(createStore);
 
+//Fallback scenario for router
 const NoMatch = () =>
 	<div>
 		<h3>Sorry, page not found</h3>
 	</div>;
 
+//DOM render method including routes, provider, store and Material-UI
 ReactDOM.render(
 	<MuiThemeProvider muiTheme={getMuiTheme()}>
 		<Provider store={createStoreWithMiddleware(reducers)}>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 //Actions
-import { remove, increment, decrement } from '../actions';
+import * as actions from '../actions';
 
 //Import Material-UI component
 import { List, ListItem } from 'material-ui/List';
@@ -11,6 +11,9 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
+
+//Animations
+import { CSSTransition, transit } from 'react-css-transition';
 
 //Import component
 import Header from './Header';
@@ -97,38 +100,47 @@ class HistoryLookup extends Component {
 		return (
 			<div>
 				<Header />
-				<div style={FloatBtn}>
-					<FloatingActionButton
-						secondary
-						style={{ margin: '5px' }}
-						onClick={this.handleIncrement.bind(this)}
-					>
-						<ContentAdd />
-					</FloatingActionButton>
-					<FloatingActionButton
-						style={{ margin: '5px' }}
-						onClick={this.handleDecrement.bind(this)}
-					>
-						<ContentRemove />
-					</FloatingActionButton>
-					<p className="text-muted" style={{ fontWeight: '300' }}>
-						Remove entries after: {this.props.counter}{' '}
-						{this.props.counter === 1 ? 'day' : 'days'}
-					</p>
-				</div>
-				<div className="container">
-					<TextField
-						hintText="Search for company name"
-						fullWidth={true}
-						value={this.state.search}
-						onChange={this.updateSearch.bind(this)}
-					/>
+				<CSSTransition
+					defaultStyle={{ opacity: '0' }}
+					enterStyle={{ opacity: transit(1.0, 500, 'ease-in-out') }}
+					active={true}
+					transitionAppear
+				>
 					<div>
-						<List>
-							{this.renderListItems()}
-						</List>
+						<div style={FloatBtn}>
+							<FloatingActionButton
+								secondary
+								style={{ margin: '5px' }}
+								onClick={this.handleIncrement.bind(this)}
+							>
+								<ContentAdd />
+							</FloatingActionButton>
+							<FloatingActionButton
+								style={{ margin: '5px' }}
+								onClick={this.handleDecrement.bind(this)}
+							>
+								<ContentRemove />
+							</FloatingActionButton>
+							<p className="text-muted" style={{ fontWeight: '300' }}>
+								Remove entries after: {this.props.counter}{' '}
+								{this.props.counter === 1 ? 'day' : 'days'}
+							</p>
+						</div>
+						<div className="container">
+							<TextField
+								hintText="Search for company name"
+								fullWidth={true}
+								value={this.state.search}
+								onChange={this.updateSearch.bind(this)}
+							/>
+							<div>
+								<List>
+									{this.renderListItems()}
+								</List>
+							</div>
+						</div>
 					</div>
-				</div>
+				</CSSTransition>
 			</div>
 		);
 	}
@@ -147,6 +159,4 @@ function mapStateToProps({ lookupData, counter }) {
 	return { lookupData, counter };
 }
 
-export default connect(mapStateToProps, { remove, increment, decrement })(
-	HistoryLookup
-);
+export default connect(mapStateToProps, actions)(HistoryLookup);
