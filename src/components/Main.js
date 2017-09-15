@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Lookup from './Lookup';
 import Display from './Display';
 import Header from './Header';
+import Footer from './Footer';
 
 //Animations
 import { CSSTransition, transit } from 'react-css-transition';
@@ -28,6 +29,7 @@ class Main extends Component {
 						</div>
 					</div>
 				</CSSTransition>
+				<Footer />
 			</div>
 		);
 	}

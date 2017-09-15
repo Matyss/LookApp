@@ -17,6 +17,7 @@ import { CSSTransition, transit } from 'react-css-transition';
 
 //Import component
 import Header from './Header';
+import Footer from './Footer';
 
 class HistoryLookup extends Component {
 	constructor(props) {
@@ -141,6 +142,7 @@ class HistoryLookup extends Component {
 						</div>
 					</div>
 				</CSSTransition>
+				<Footer />
 			</div>
 		);
 	}
