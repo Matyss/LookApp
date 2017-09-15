@@ -36,6 +36,9 @@ const renderText = ({ input, label, meta: { touched, error }, ...custom }) =>
 		hintText={label}
 		floatingLabelText={label}
 		errorText={touched && error}
+		onKeyPress={e => {
+			if (e.key === 'Enter') e.preventDefault();
+		}}
 		{...input}
 		{...custom}
 	/>;
